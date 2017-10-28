@@ -1,6 +1,6 @@
 #-*- code:utf8 -*-
 
-# Définition des 4 classes indentifiées :
+# Définition des  dclasses indentifiées :
 
 # une classe Hero pour créer McGyver
 class Hero:
@@ -42,7 +42,7 @@ class Gardian:
         # Si Hero et Gardian sur la même position :
             # Si hero.needle = true et hero.plastic_tube = true et hero.ether = true:
                 # gardian.life = 0 et gardian est détruit
-            # Sinon : hero.life = 0
+            # Sinon : hero.life = 0 et fin du programme
         pass
 
 
