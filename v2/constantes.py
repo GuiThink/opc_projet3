@@ -13,4 +13,4 @@ start_image = "images/start.png"
 end_image = "images/end.png"
 wall_image = "images/wall.png"
 loot_image = "images/loot.png"
-
+hero_image = "images/mcgyver.png"

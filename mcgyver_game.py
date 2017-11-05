@@ -8,9 +8,19 @@ import json
 # une classe Hero pour créer McGyver
 class Hero:
 
-    def __init__(self, **hero_list):
+    def __init__(self, **hero_list, x, y):
         for attr_name, attr_value in hero_list.items():
             setattr(self, attr_name, attr_value)
+        self.x = x
+        self.y = y
+
+    @property
+    def hero_x(self):
+        self.x = random.randint(0,15)
+
+    @property
+    def hero_y(self):
+        self.y = random.randint(0,15)
 
     # méthode de déplacement
     def move(self):
@@ -65,11 +75,15 @@ class Position:
         self.latitude = random.randint(0.15)
 
 
-class Zone:
+class Labyrinthe:
 
+    ZONE = []
     MIN_LONGITUDE = 0
     MAX_LONGITUDE = 15
+    MIN_LATITUDE = 0
+    MAX_LATITUDE = 15
     WIDTH = 1
+    HEIGHT = 1
 
     def __init__(self, corner1, corner2):
         self.corner1 = corner1
@@ -77,9 +91,9 @@ class Zone:
 
     def initialize_zones(self):
         for longitude in range(self.MIN_LONGITUDE, self.MAX_LONGITUDE, self.WIDTH):
-            bottom_left_corner = Position(longitude, 1)
+            bottom_left_corner = Position(longitude, latitude)
             top_right_corner = Position(longitude + self.WIDTH)
-            zone = Zone(bottom_left_corner)
+            zone = Labyrinthe(bottom_left_corner)
 
 
 def main():
@@ -91,7 +105,7 @@ def main():
 
     for hero in json.load(open("hero_list.json")):
         hero = Hero(**hero)
-        print(hero.name, hero.life, hero.position)
+        print(hero.name, hero.life, hero.position, hero.random_position.x)
 
     for gardian in json.load(open("gardian_list.json")):
         gardian = Gardian(**gardian)
