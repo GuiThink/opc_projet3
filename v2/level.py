@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from random import randrange
+from random import *
 from config import *
 
 # game images
@@ -44,6 +44,16 @@ class Level:
     #     self.rand_x = random.randint()
     #
     #
+    # def random_loot(self):
+    #     self.random_x = 0
+    #     self.random_y = 0
+    #     for line in self.structure:
+    #         for sprite in line:
+    #             while sprite == 'w' or 's' or 'e':
+    #                 self.random_x = random.int(0,15)
+    #                 self.random_y = random.int(0,15)
+
+
     #     # on créé une structure uniquement pour les loots et basée sur le contenu de self.structure
     #     loot_structure = []
     #     # on parcourt la structure du niveau
@@ -54,7 +64,7 @@ class Level:
     #             if sprite != 'w' or 's' or 'e'or '\n' :
     #                 # si la condition est vérifiée :
     #                 loot_line.append(True)
-
+    #
     # def rand_loot(self):
     #     loot_x = 0
     #     loot_y = 0
@@ -63,7 +73,7 @@ class Level:
     #         for sprite in line:
     #             if sprite == ' ':
     #                 ss
-
+    #
     # foo = ['a', 'b', 'c', 'd', 'e']
     # # from random import randrange
     # random_index = randrange(0,len(foo))
@@ -89,6 +99,8 @@ class Level:
                 # on définit la position x et y en pixel pour chaque sprite
                 x = box_number * sprite_size
                 y = line_number * sprite_size
+                self.random_x = box_number * sprite_size
+                self.random_y = box_number * sprite_size
                 # on met à jour window avec les images indiquées dans level_structure en les mettant à la bonne position
                 if sprite == 'w':
                     window.blit(wall, (x, y))
@@ -96,7 +108,8 @@ class Level:
                     window.blit(start, (x, y))
                 elif sprite == 'e':
                     window.blit(end, (x, y))
-                # elif sprite == 'l':
-                #     window.blit(loot, (x, y))
+                elif sprite == 'l':
+                    #window.blit(loot,(self.random_x, self.random_y))
+                    window.blit(loot, (x, y))
                 box_number += 1
             line_number += 1
