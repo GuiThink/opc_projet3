@@ -66,8 +66,8 @@ def main():
         window.blit(mg.direction, (mg.x, mg.y))
         pygame.display.flip()
 
-        # Fin du jeu si mcgyver arrive dans la case 'e'
-        if level.structure[mg.box_y][mg.box_x] == 'e':
+        # Fin du jeu si mcgyver arrive dans la case 'e' et qu'il a tous les loot
+        if level.structure[mg.box_y][mg.box_x] == 'e'and mg.loot1 == True and mg.loot2 == True and mg.loot3 == True:
             run = 0
 
 
