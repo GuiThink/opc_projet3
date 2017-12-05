@@ -21,7 +21,6 @@ def main():
 
     # génération du niveau
     level = Level("level_1")
-    level.level_generation()
     level.show_level(window)
 
     #génération de mcgyver
@@ -65,6 +64,11 @@ def main():
         #window.blit(loot1.random_position(), (loot1.x, loot1.y))
         window.blit(mg.direction, (mg.x, mg.y))
         pygame.display.flip()
+
+        # Loot d'un objet
+        # if level.structure[mg.box_y][mg.box_x] == level.structure['l']:
+        #     mg.loot1 == True
+
 
         # Fin du jeu si mcgyver arrive dans la case 'e' et qu'il a tous les loot
         if level.structure[mg.box_y][mg.box_x] == 'e'and mg.loot1 == True and mg.loot2 == True and mg.loot3 == True:

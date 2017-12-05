@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from random import *
+import random
 from config import *
 
 # game images
@@ -15,6 +15,12 @@ class Level:
     def __init__(self, file):
         self.file = file
         self.structure = 0
+        self.random_x = 0
+        self.random_y = 0
+        self.level_generation()
+        self.generate_loot('l')
+        self.generate_loot('m')
+        self.generate_loot('n')
 
     # on ouvre le fichier qui contient le niveau
     # on intialise une variable level_structure qui contient une liste vide
@@ -35,54 +41,30 @@ class Level:
             self.structure = level_structure
 
 
-## tests pour générer les loots aléatoirement...euh...je suis perdu.
-
-    # def random_loot(self):
-    #     loot = pygame.image.load(loot_image).convert_alpha()
-    #     self.x = 0
-    #     self.y = 0
-    #     self.rand_x = random.randint()
-    #
-    #
-    # def random_loot(self):
-    #     self.random_x = 0
-    #     self.random_y = 0
-    #     for line in self.structure:
-    #         for sprite in line:
-    #             while sprite == 'w' or 's' or 'e':
-    #                 self.random_x = random.int(0,15)
-    #                 self.random_y = random.int(0,15)
+    def generate_loot(self, loot_name):
+        x, y = self.random_loot()
+        self.structure[y][x] = loot_name
 
 
-    #     # on créé une structure uniquement pour les loots et basée sur le contenu de self.structure
-    #     loot_structure = []
-    #     # on parcourt la structure du niveau
-    #     for line in self.structure:
-    #         # pour chaque ligne, on vérifie que la valeur du sprite n'est pas w, ou s, ou e
-    #         loot_line = []
-    #         for sprite in line:
-    #             if sprite != 'w' or 's' or 'e'or '\n' :
-    #                 # si la condition est vérifiée :
-    #                 loot_line.append(True)
-    #
-    # def rand_loot(self):
-    #     loot_x = 0
-    #     loot_y = 0
-    #
-    #     for line in self.structure:
-    #         for sprite in line:
-    #             if sprite == ' ':
-    #                 ss
-    #
-    # foo = ['a', 'b', 'c', 'd', 'e']
-    # # from random import randrange
-    # random_index = randrange(0,len(foo))
-    # print foo[random_index]
-    #
-    #
-    # while sprite != 'w' or 's' or 'e':
-    #     rand_x = randrange(level_line)
-    #     rand_y = randrange()
+    def random_loot(self):
+        coord_valids = False
+        x = 0
+        y = 0
+        while coord_valids == False:
+            x = random.randrange(0, 14)
+            y = random.randrange(0, 14)
+            coord_valids = self.is_case_empty(x, y)
+        # print("%d" % x)
+        # print("%d" % y)
+        # exit()
+        return [x, y]
+
+
+    def is_case_empty(self, x, y):
+        if self.structure[y][x] == ' ':
+            return True
+        else:
+            return False
 
 
     def show_level(self, window):
@@ -99,8 +81,6 @@ class Level:
                 # on définit la position x et y en pixel pour chaque sprite
                 x = box_number * sprite_size
                 y = line_number * sprite_size
-                self.random_x = box_number * sprite_size
-                self.random_y = box_number * sprite_size
                 # on met à jour window avec les images indiquées dans level_structure en les mettant à la bonne position
                 if sprite == 'w':
                     window.blit(wall, (x, y))
@@ -109,7 +89,6 @@ class Level:
                 elif sprite == 'e':
                     window.blit(end, (x, y))
                 elif sprite == 'l':
-                    #window.blit(loot,(self.random_x, self.random_y))
                     window.blit(loot, (x, y))
                 box_number += 1
             line_number += 1
