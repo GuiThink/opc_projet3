@@ -6,14 +6,6 @@ import pygame
 from pygame.locals import *
 import random
 
-# game images
-# BACKGROUND_IMAGE = "images/background.png"
-# START_IMAGE = "images/start.png"
-# END_IMAGE = "images/end.png"
-# WALL_IMAGE = "images/wall.png"
-# LOOT_IMAGE = "images/loot.png"
-# HERO_IMAGE = "images/mcgyver.png"
-
 class Level(object):
     """Class generates the maze and hero, badguy position.
     Moreover, it generates random loots positions"""
