@@ -7,13 +7,12 @@ from pygame.locals import *
 import random
 
 # game images
-BACKGROUND_IMAGE = "images/background.png"
-START_IMAGE = "images/start.png"
-END_IMAGE = "images/end.png"
-WALL_IMAGE = "images/wall.png"
-LOOT_IMAGE = "images/loot.png"
-HERO_IMAGE = "images/mcgyver.png"
-
+# BACKGROUND_IMAGE = "images/background.png"
+# START_IMAGE = "images/start.png"
+# END_IMAGE = "images/end.png"
+# WALL_IMAGE = "images/wall.png"
+# LOOT_IMAGE = "images/loot.png"
+# HERO_IMAGE = "images/mcgyver.png"
 
 class Level(object):
     """Class generates the maze and hero, badguy position.
@@ -26,6 +25,12 @@ class Level(object):
         self.generate_loot('m')
         self.generate_loot('n')
         self.loot_list = []
+        self.background = pygame.image.load("images/background.png").convert()
+        self.wall = pygame.image.load("images/wall.png").convert()
+        self.start = pygame.image.load("images/start.png").convert()
+        self.end = pygame.image.load("images/end.png").convert_alpha()
+        self.loot = pygame.image.load("images/loot.png").convert_alpha()
+        self.hero = pygame.image.load("images/mcgyver.png").convert_alpha()
 
     def level_generation(self):
         """Generate a maze based on a file and append it in a list."""
@@ -114,15 +119,8 @@ class Level(object):
 
     def show_level(self, window):
         """Function generates maze images"""
-        background = pygame.image.load(BACKGROUND_IMAGE).convert()
-        wall = pygame.image.load(WALL_IMAGE).convert()
-        start = pygame.image.load(START_IMAGE).convert()
-        end = pygame.image.load(END_IMAGE).convert_alpha()
-        loot = pygame.image.load(LOOT_IMAGE).convert_alpha()
-        hero = pygame.image.load(HERO_IMAGE).convert_alpha()
-
-        window.blit(background, (0, 0))
-        window.blit(start, (0, 0))
+        window.blit(self.background, (0, 0))
+        window.blit(self.start, (0, 0))
         line_number = 0
 
         for line in self.structure:
@@ -132,17 +130,17 @@ class Level(object):
                 y = line_number * 30
 
                 if sprite == '#':
-                    window.blit(wall, (x, y))
+                    window.blit(self.wall, (x, y))
                 elif sprite == 'e':
-                    window.blit(end, (x, y))
+                    window.blit(self.end, (x, y))
                 elif sprite == 'l':
-                    window.blit(loot, (x, y))
+                    window.blit(self.loot, (x, y))
                 elif sprite == 'm':
-                    window.blit(loot, (x, y))
+                    window.blit(self.loot, (x, y))
                 elif sprite == 'n':
-                    window.blit(loot, (x, y))
+                    window.blit(self.loot, (x, y))
                 elif sprite == 'M':
-                    window.blit(hero, (x, y))
+                    window.blit(self.hero, (x, y))
 
                 box_number += 1
             line_number += 1

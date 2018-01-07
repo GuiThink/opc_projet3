@@ -35,20 +35,19 @@ def manage_event(mcgyver):
 
 def main():
     """Generates class and manages loop game"""
-    level = Level("level_1") # generates maze instance base on level_1 file
-    mcgyver = Hero(level) # generates hero instance
+    pygame.init()
+    pygame.display.init()
+    pygame.time.Clock().tick(30) #processor load control
     window = pygame.display.set_mode((WINDOW_SIDE, WINDOW_SIDE)) # generates the game window
     pygame.display.set_caption(WINDOW_TITLE) # set title
+    level = Level("level_1") # generates maze instance base on level_1 file
+    mcgyver = Hero(level) # generates hero instance
     level.show_level(window)  # Level generation in pygame
     pygame.display.flip() #screen refresh
     key = ''
 
     stop = False
     while stop == False: # game loop
-
-        pygame.init()
-
-        pygame.time.Clock().tick(30) #processor load control
 
         stop = manage_event(mcgyver)
         level.show_level(window)
