@@ -74,8 +74,10 @@ class Hero(object):
         verifies that hero has 3 loots. If True, the hero wins."""
         if self.level.structure[x][y] == 'e':
             if self.level.loot_list_check():
+                print("You won !!! McGyver escapes away from this crazy maze.")
                 return True
             else:
+                print("You die miserably...")
                 return True
         else:
             return False
